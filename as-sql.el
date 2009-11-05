@@ -21,29 +21,25 @@ This is used to set `sql-alternate-buffer-name' within
             (sql-rename-buffer)))
 
 (setq sql-connection-alist
-      '((local-root
-         (sql-product 'mysql)
-         (sql-server "localhost")
-         (sql-user "root")
-         (sql-password "mysql123")
-         (sql-database "")
-         (sql-port 3306))
-        (appszen
+      '((appszen
          (sql-product 'mysql)
          (sql-server "localhost")
          (sql-user "appszen")
          (sql-password "appszen")
-         (sql-database "appszen"))))
+         (sql-database "appszen")
+         (sql-port 3306))
+        (appszen-test
+         (sql-product 'mysql)
+         (sql-server "localhost")
+         (sql-user "appszen")
+         (sql-password "appszen")
+         (sql-database "appszen_test"))))
 
 (defun sql-connect-preset (name)
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
   (eval `(let ,(cdr (assoc name sql-connection-alist))
     (flet ((sql-get-login (&rest what)))
       (sql-product-interactive sql-product)))))
-
-(defun sql-root ()
-  (interactive)
-  (sql-connect-preset 'local-root))
 
 (setq 
  sql-database "appszen"
@@ -55,6 +51,10 @@ This is used to set `sql-alternate-buffer-name' within
 (defun sql-appszen ()
   (interactive)
   (sql-connect-preset 'appszen))
+
+(defun sql-appszen-test ()
+  (interactive)
+  (sql-connect-preset 'appszen-test))
 
 (provide 'as-sql)
 ;;; as-sql.el ends here
