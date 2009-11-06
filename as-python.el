@@ -66,20 +66,20 @@
   (require-try 'ipython)
   (setq py-python-command-args '("-pylab" "-colors" "Linux")))
 
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))
-  (require-try 'flymake-cursor)
+;; (when (load "flymake" t)
+;;   (defun flymake-pylint-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                        'flymake-create-temp-inplace))
+;;            (local-file (file-relative-name
+;;                         temp-file
+;;                         (file-name-directory buffer-file-name))))
+;;       (list "epylint" (list local-file))))
+;;   (require-try 'flymake-cursor)
   
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pylint-init))
-  (add-hook 'python-mode-hook
-            '(lambda () (flymake-mode t))))
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;;                '("\\.py\\'" flymake-pylint-init))
+;;   (add-hook 'python-mode-hook
+;;             '(lambda () (flymake-mode t))))
                
                
 ;; ;;;_. Return should newline and indent
