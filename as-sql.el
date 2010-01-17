@@ -21,19 +21,19 @@ This is used to set `sql-alternate-buffer-name' within
             (sql-rename-buffer)))
 
 (setq sql-connection-alist
-      '((appszen
+      '((epsilon
          (sql-product 'mysql)
          (sql-server "localhost")
-         (sql-user "appszen")
-         (sql-password "appszen")
-         (sql-database "appszen")
+         (sql-user "epsilon")
+         (sql-password "epsilon")
+         (sql-database "epsilon")
          (sql-port 3306))
-        (appszen-test
+        (epsilon-test
          (sql-product 'mysql)
          (sql-server "localhost")
-         (sql-user "appszen")
-         (sql-password "appszen")
-         (sql-database "appszen_test"))))
+         (sql-user "epsilon")
+         (sql-password "epsilon")
+         (sql-database "epsilon_test"))))
 
 (defun sql-connect-preset (name)
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
@@ -42,19 +42,19 @@ This is used to set `sql-alternate-buffer-name' within
       (sql-product-interactive sql-product)))))
 
 (setq 
- sql-database "appszen"
+ sql-database "epsilon"
  sql-product 'mysql
  sql-server "localhost"
- sql-user "appszen"
- sql-password "appszen")
+ sql-user "epsilon"
+ sql-password "epsilon")
 
-(defun sql-appszen ()
+(defun sql-epsilon ()
   (interactive)
-  (sql-connect-preset 'appszen))
+  (sql-connect-preset 'epsilon))
 
-(defun sql-appszen-test ()
+(defun sql-epsilon-test ()
   (interactive)
-  (sql-connect-preset 'appszen-test))
+  (sql-connect-preset 'epsilon-test))
 
 (provide 'as-sql)
 ;;; as-sql.el ends here

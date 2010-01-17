@@ -36,6 +36,18 @@
       ;; (default is 32)
       comint-input-ring-size (string-to-number (or (getenv "HISTSIZE") "100")))
 
+(global-set-key (kbd "C-+") 'toggle-hiding)
+(global-set-key (kbd "C-\\") 'toggle-selective-display)
+
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'java-mode-hook       'hs-minor-mode)
+(add-hook 'lisp-mode-hook       'hs-minor-mode)
+(add-hook 'perl-mode-hook       'hs-minor-mode)
+(add-hook 'sh-mode-hook         'hs-minor-mode)
+(add-hook 'python-mode-hook     'hs-minor-mode)
+(add-hook 'html-mode-hook       'hs-minor-mode)
+(add-hook 'nxhtml-mode-hook     'hs-minor-mode)
 
 ;;;_. completion in sql mode
 (when (require-try 'sql-completion)
@@ -68,6 +80,7 @@
         (delete-other-windows))))
 
 ;;longlines is especially useful for compilation buffers with long error strings
+;;add to compilation-finish-functions if needed
 (defun as/compilation-long-lines (buf msg)
   "set longlines mode for *compilation* buffer, and wrap lines for use with ecb"
   (interactive)
@@ -90,7 +103,7 @@
             (replace-match " " nil nil))))))
 
 ;;;uncomment if needed
-(setq compilation-finish-functions '(compile-check-delete as/compilation-long-lines))
+(setq compilation-finish-functions '(compile-check-delete))
 
 ;;;_. I like using dwim without transient-mark-mode
 (defun as/comment-dwim (arg)

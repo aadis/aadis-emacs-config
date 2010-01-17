@@ -18,53 +18,56 @@
 
 ;;; Code:
 
-(when (require-try 'python-mode)
-  ;; (require 'pycomplete)
+;; (when (require-try 'python-mode)
+;;   ;; (require 'pycomplete)
 
-  ;; (when (require 'pymacs)
+;;   ;; (when (require 'pymacs)
 
-  ;;   (autoload 'pymacs-load "pymacs" nil t)
-  ;;   (autoload 'pymacs-eval "pymacs" nil t)
-  ;;   (autoload 'pymacs-apply "pymacs")
-  ;;   (autoload 'pymacs-call "pymacs"))
+;;   ;;   (autoload 'pymacs-load "pymacs" nil t)
+;;   ;;   (autoload 'pymacs-eval "pymacs" nil t)
+;;   ;;   (autoload 'pymacs-apply "pymacs")
+;;   ;;   (autoload 'pymacs-call "pymacs"))
 
 
-  (add-hook 'python-mode-hook
-            '(lambda () (progn
-                          (eldoc-mode 1)
-                          (which-function-mode t)
-                          (delete (assoc 'which-func-mode mode-line-format) mode-line-format)
-                          (setq which-func-header-line-format
-                                '(which-func-mode
-                                  ("" which-func-format)))
-                          (defadvice which-func-ff-hook (after header-line activate)
-                            (when which-func-mode
-                              (delete (assoc 'which-func-mode mode-line-format) mode-line-format)
-                              (setq header-line-format which-func-header-line-format)))
-                          (set-variable 'py-indent-offset 4)
-                          ;; (make-variable-buffer-local 'yas/trigger-key)
-                          ;; (make-variable-buffer-local 'yas/next-field-key)
-                          ;; (setq yas/trigger-key (kbd "<C-tab>"))
-                          ;; (setq yas/next-field-key (kbd "<tab>"))
+;;   (add-hook 'python-mode-hook
+;;             '(lambda () (progn
+;;                           (eldoc-mode 1)
+;;                           (which-function-mode t)
+;;                           (delete (assoc 'which-func-mode mode-line-format) mode-line-format)
+;;                           (setq which-func-header-line-format
+;;                                 '(which-func-mode
+;;                                   ("" which-func-format)))
+;;                           (defadvice which-func-ff-hook (after header-line activate)
+;;                             (when which-func-mode
+;;                               (delete (assoc 'which-func-mode mode-line-format) mode-line-format)
+;;                               (setq header-line-format which-func-header-line-format)))
+;;                           (set-variable 'py-indent-offset 4)
+;;                           ;; (make-variable-buffer-local 'yas/trigger-key)
+;;                           ;; (make-variable-buffer-local 'yas/next-field-key)
+;;                           ;; (setq yas/trigger-key (kbd "<C-tab>"))
+;;                           ;; (setq yas/next-field-key (kbd "<tab>"))
 
-                          (auto-revert-mode 1)
-                          (set-variable 'py-smart-indentation nil)
-                          (set-variable 'indent-tabs-mode nil))))
+;;                           (auto-revert-mode 1)
+;;                           (set-variable 'py-smart-indentation nil)
+;;                           (set-variable 'indent-tabs-mode nil))))
 
-  ;; Load these key bindings for python shell
-  (define-key py-shell-map (kbd "M-p") 'comint-previous-matching-input-from-input)
-  (define-key py-shell-map (kbd "M-n") 'comint-next-matching-input-from-input)
-  (define-key py-shell-map (kbd "C-M-n") 'comint-next-input)
-  (define-key py-shell-map (kbd "C-M-p") 'comint-previous-input)
-  (define-key py-shell-map "\C-w" 'comint-kill-region)
-  (define-key py-shell-map [C-S-backspace] 'comint-kill-whole-line)
+;;   ;; Load these key bindings for python shell
+;;   (define-key py-shell-map (kbd "M-p") 'comint-previous-matching-input-from-input)
+;;   (define-key py-shell-map (kbd "M-n") 'comint-next-matching-input-from-input)
+;;   (define-key py-shell-map (kbd "C-M-n") 'comint-next-input)
+;;   (define-key py-shell-map (kbd "C-M-p") 'comint-previous-input)
+;;   (define-key py-shell-map "\C-w" 'comint-kill-region)
+;;   (define-key py-shell-map [C-S-backspace] 'comint-kill-whole-line)
     
-  (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-  (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
+;;   (define-key py-mode-map (kbd "M-f") 'py-forward-into-nomenclature)
+;;   (define-key py-mode-map (kbd "M-b") 'py-backward-into-nomenclature)
+
+;;   (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+;;   (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
   
-  (setq ipython-command "psh")
-  (require-try 'ipython)
-  (setq py-python-command-args '("-pylab" "-colors" "Linux")))
+;;   (setq ipython-command "psh")
+;;   (require-try 'ipython)
+;;   (setq py-python-command-args '("-pylab" "-colors" "Linux")))
 
 ;; (when (load "flymake" t)
 ;;   (defun flymake-pylint-init ()
@@ -148,6 +151,11 @@
 ;;somehow ropemacs-mode gets added to this list, remove (since we added it manually)
 ;;(setq python-mode-hook (remove* 'ropemacs-mode python-mode-hook))
 
+(setq python-shell-input-prompt-1-regexp "^In \\[[0-9]+\\]: *"
+      python-shell-input-prompt-2-regexp "^   [.][.][.]+: *")
 
+(ansi-color-for-comint-mode-on)
+
+(setq python-python-command "psh")
 
 (provide 'as-python)

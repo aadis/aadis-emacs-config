@@ -117,5 +117,26 @@
 
 ;; (require-try 'ledger-indent)
 
+(eval-after-load 'rcirc '(require 'rcirc-color))
+
+(setq rcirc-bots '("fsbot" "birny" "lisppaste" "specbot"))
+(setq rcirc-pals '("e1f" "Khmar" "kensanata" "alephnull" "harsha"))
+(defface rcirc-pal-nick-face
+  '((((class color) (background dark))  :foreground "PaleGreen")
+    (((class color) (background light)) :foreground "PaleGreen3"))
+  "Face used for nicks in `rcirc-pals' list.")
+
+(defface rcirc-bot-nick-face
+  '((((class color) (background dark))  :foreground "tomato")
+    (((class color) (background light)) :foreground "tomato3"))
+  "Face used for nicks in `rcirc-bots' list.")
+
+(defadvice rcirc-facify (before rcirc-facify-pals)
+  (when (eq face 'rcirc-other-nick)
+    (when (member string rcirc-pals)
+      (setq face 'rcirc-pal-nick-face))
+    (when (member string rcirc-bots)
+      (setq face 'rcirc-bot-nick-face))))
+(ad-activate 'rcirc-facify)
 
 (provide 'as-packages)
