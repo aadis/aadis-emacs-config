@@ -1,3 +1,4 @@
+(require 'company)
 (defun company-sql--grab-symbol ()
   (let ((symbol (company-grab-symbol)))
     (when symbol
