@@ -2,9 +2,6 @@
 (require-try 'js2-mode)
 ;;other modes set it in the beginning, take them out
 
-(setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.js\\'$" . js2-mode) auto-mode-alist))
-
 ;;this is for mozrepl
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
@@ -35,8 +32,9 @@
   (interactive)
   (remove-hook 'after-change-functions 'moz-update t))
 
-(setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.js\\'$" . js2-mode) auto-mode-alist))
+(setq auto-mode-alist (remove-file-name-assocs "\\.js\\'"))
+(add-to-list 'auto-mode-alist  '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist  '("\\.js\\'" . js2-mode))
 
 ;;; Used to work for firefox upto 3.0 Stopped with 3.5
 (global-set-key (kbd "C-x p")
@@ -49,5 +47,7 @@
                   (interactive)
                   (comint-send-string (inferior-moz-process)
                                       "repl.home = function() { return this.enter(content.wrappedJSObject); };")))
+
+(setq mozrepl-enter-content "repl.enter(content.wrappedJSObject)")
 
 (provide 'as-js)
