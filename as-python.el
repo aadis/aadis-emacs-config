@@ -154,6 +154,7 @@
 (setq python-shell-input-prompt-1-regexp "^In \\[[0-9]+\\]: *"
       python-shell-input-prompt-2-regexp "^   [.][.][.]+: *")
 
+(require 'ansi-color)
 (ansi-color-for-comint-mode-on)
 
 (setq python-python-command "psh")
