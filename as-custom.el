@@ -148,6 +148,10 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(cursor ((t (:background "red" :foreground "red"))))
+ '(elscreen-tab-background-face ((((class color)) (:background "gray85"))))
+ '(elscreen-tab-control-face ((((class color)) (:background "white" :foreground "black"))))
+ '(elscreen-tab-current-screen-face ((((class color)) (:background "white" :foreground "black" :weight bold :height 1.2))))
+ '(elscreen-tab-other-screen-face ((((class color)) (:background "lightyellow" :foreground "black" :slant italic :height 1.2))))
  '(font-lock-comment-face ((t (:foreground "Firebrick" :slant italic :weight light :height 0.9 :family "Lucida Grande"))))
  '(gpf-variable-width-face ((nil (:height 1.1 :family "Lucida Grande"))))
  '(mlinks-link ((t nil)))

@@ -114,7 +114,7 @@
 
 (global-set-key (kbd "M-;") 'as/comment-dwim)
 (global-set-key "\M-j" 'pop-to-mark-command)
-(global-set-key "\C-z" 'multi-occur)
+;;(global-set-key "\C-z" 'multi-occur)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
@@ -122,10 +122,10 @@
 (when (require-try 'paredit)
   (autoload 'paredit-mode "paredit" 
     "Minor mode for pseudo-structurally editing Lisp code." t)
-
   (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1))))
 
-(add-hook 'css-mode-hook (lambda () (css-color-mode t)))
+(add-hook 'css-mode-hook (lambda ()
+                           (css-color-mode t)))
 
 (setq as/open-file-list '("/Users/aaditya/src/id/proto/src/id/vaitarna/vaitarna/lib/*.py"
                           "/Users/aaditya/src/id/proto/src/id/vaitarna/vaitarna/config/*.py"

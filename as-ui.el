@@ -331,12 +331,12 @@ The file cache can be saved to a file using
 
 ;; ;;need elscreen
 ;; (add-to-list 'load-path (expand-file-name "~/src/local/emacs/apel-10.7"))
-;; (when (require-try 'elscreen)
-;;   (global-set-key (kbd "<C-tab>") 'elscreen-toggle)
-;;   (global-set-key (kbd "C-z C-z") 'elscreen-toggle)
-;;   (global-set-key [(control shift right)] 'elscreen-next)
-;;   (global-set-key [(control shift left)] 'elscreen-previous)
-;;   (require-try 'elscreen-color-theme))
+(when (require-try 'elscreen)
+  (global-set-key (kbd "<C-tab>") 'elscreen-toggle)
+  (global-set-key (kbd "C-z C-z") 'elscreen-toggle)
+  (global-set-key [(control shift right)] 'elscreen-next)
+  (global-set-key [(control shift left)] 'elscreen-previous)
+  (require-try 'elscreen-color-theme))
 
 ;;(require-try 'tabbar)
 
@@ -368,6 +368,19 @@ The file cache can be saved to a file using
 
 ;;window configs are pretty important
 (winner-mode t)
+(setq winner-boring-buffers '("*Completions*"
+                              "*Compile-Log*"
+                              "*Traverse-directory*"
+                              "*Apropos*"
+                              "*Messages*"
+                              "*anything*"
+                              "*anything complete*"
+                              "*Anything Occur*"
+                              "*Help*"
+                              "*Buffer List*"
+                              "*Ibuffer*"
+                              "*irc.freenode.net*"
+                              ))
 
 (font-lock-add-keywords 'emacs-lisp-mode
       '(("(\\|)" . 'paren-face)))

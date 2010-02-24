@@ -31,7 +31,7 @@
 	       (nnimap-authenticator login)))
 
 (setq user-mail-address "aaditya@gmail.com")
-(setq gnus-ignored-from-addresses '("aaditya" "aaditya@gmail.com" "aaditya@sood.net.in" ".*@sood.net.in" "a@ideadevice.com"))
+(setq gnus-ignored-from-addresses '("aaditya" "aaditya@gmail.com" "aaditya@sood.net.in" ".*@sood.net.in" "a@ideadevice.com" "aaditya@hcoop.net"))
 
 ;;mail splitting
 
@@ -225,21 +225,21 @@
           (signature "aaditya sood\nhttp://www.ideadevice.com"))))
 
 
-(gnus-add-configuration
- '(article
-   (horizontal 1.0
-	       (vertical 35
-			 (group 1.0))
-	       (vertical 1.0
-			 (summary 0.25 point)
-			 (article 1.0)))))
-(gnus-add-configuration
- '(summary
-   (horizontal 1.0
-	       (vertical 35
-			 (group 1.0))
-	       (vertical 1.0
-			 (summary 1.0 point)))))
+;; (gnus-add-configuration
+;;  '(article
+;;    (horizontal 1.0
+;; 	       (vertical 35
+;; 			 (group 1.0))
+;; 	       (vertical 1.0
+;; 			 (summary 0.25 point)
+;; 			 (article 1.0)))))
+;; (gnus-add-configuration
+;;  '(summary
+;;    (horizontal 1.0
+;; 	       (vertical 35
+;; 			 (group 1.0))
+;; 	       (vertical 1.0
+;; 			 (summary 1.0 point)))))
 
 (require 'gnus-propfont)
 (add-hook 'gnus-article-prepare-hook 'gpf-add-faces)
@@ -258,18 +258,19 @@
       starttls-use-gnutls t)
 
 ;; Available SMTP accounts.
-(setq smtp-accounts
-      '((ssl "a@ideadevice.com" "smtp.gmail.com" 587 "a@ideadevice.com" nil)
-        (ssl "aaditya@gmail.com" "smtp.gmail.com" 587 "aaditya@gmail.com" nil)
-        (ssl "aaditya@sood.net.in" "deleuze.hcoop.net" 465 "aaditya" nil)))
+;;load from private file
+(require 'as-gnus-private)
 
- ;; Default smtpmail.el configurations.
+(setq gnus-group-line-format
+      "%M\%S\%p\%P\%m\%5y/\%-5t: %(%-40,40g%) %2,2~(cut 6)d.%2,2~(cut 4)d.%4,4~(cut 0)d %2,2~(cut 9)d:%2,2~(cut 11)d %O\n")
+
+;; Default smtpmail.el configurations.
  (require 'smtpmail)
  (setq send-mail-function 'smtpmail-send-it
        message-send-mail-function 'smtpmail-send-it
        mail-from-style nil
        user-full-name "aaditya sood"
-       smtpmail-debug-info t
+       smtpmail-debug-info nil
        smtpmail-debug-verb t)
 
  (defun set-smtp-plain (server port user password)
@@ -304,7 +305,8 @@
                 (return (apply 'set-smtp-plain auth-spec)))
                ((eql acc-type 'ssl)
                 (return (apply 'set-smtp-ssl auth-spec)))
-               (t (error "Unrecognized SMTP account type: `%s'." acc-type)))
+               (t
+                (return (apply 'set-smtp-ssl auth-spec))))
            finally (error "Cannot infer SMTP information."))))
 
 (add-hook 'message-send-hook 'change-smtp)
