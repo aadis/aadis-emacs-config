@@ -77,8 +77,8 @@
 (when (require-try 'windmove) 
   (windmove-default-keybindings))
 
-;; (when (require 'recentf)
-;;   (recentf-mode t))
+(when (require 'recentf)
+  (recentf-mode t))
 
 ;;;_. uniquify helps in same file names
 (require 'uniquify)
@@ -138,5 +138,8 @@
     (when (member string rcirc-bots)
       (setq face 'rcirc-bot-nick-face))))
 (ad-activate 'rcirc-facify)
+
+(setq-default save-place t)
+(require 'saveplace) 
 
 (provide 'as-packages)

@@ -202,6 +202,8 @@
 ;;     (gnus-summary-show-article)))
 ;; (define-key gnus-article-mode-map "WH" 'wicked/gnus-article-show-html)
 
+;;(add-to-list 'gnus-buttonized-mime-types "multipart/alternative")
+
 ;;adaptive scoring
 (setq gnus-use-adaptive-scoring t)
 (setq gnus-default-adaptive-score-alist
@@ -255,6 +257,8 @@
       smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587
+      smtpmail-debug-info t
+      smtpmail-debug-verb t
       starttls-use-gnutls t)
 
 ;; Available SMTP accounts.

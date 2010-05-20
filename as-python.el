@@ -154,6 +154,16 @@
 (setq python-shell-input-prompt-1-regexp "^In \\[[0-9]+\\]: *"
       python-shell-input-prompt-2-regexp "^   [.][.][.]+: *")
 
+(require 'anything-ipython)
+(add-hook 'python-mode-hook #'(lambda ()
+                                (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+(add-hook 'ipython-shell-hook #'(lambda ()
+                                  (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+
+(when (require 'anything-show-completion nil t)
+  (use-anything-show-completion 'anything-ipython-complete
+                                '(length initial-pattern)))
+
 (require 'ansi-color)
 (ansi-color-for-comint-mode-on)
 

@@ -397,13 +397,13 @@ The file cache can be saved to a file using
    :group 'starter-kit-faces)
 ;;;_. end
 
-(setq show-paren-match '((:background "gray5" :slant normal)))
+;; (setq show-paren-match '((:background "gray5" :slant normal)))
 
-(defface
-  show-paren-match 
-  '((:background "gray5" :slant normal))
-  "Face used for parent matching"
-  :group 'starter-kit-frame)
+;; (defface
+;;   show-paren-match 
+;;   '((:background "gray5" :slant normal))
+;;   "Face used for parent matching"
+;;   :group 'starter-kit-frame)
 
 (require 'ibuffer)
 (setq ibuffer-default-sorting-mode 'major-mode)
@@ -439,6 +439,13 @@ The file cache can be saved to a file using
 
 (require 'ac-anything)
 (define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-anything)
+
+(if (require 'sml-modeline nil 'noerror)    ;; use sml-modeline if available
+    (progn 
+      (sml-modeline-mode 1)                   ;; show buffer pos in the mode line
+      (scroll-bar-mode -1))                   ;; turn off the scrollbar
+  (scroll-bar-mode 1)                       ;; otherwise, show a scrollbar...
+  (set-scroll-bar-mode 'right))    
 
 (provide 'as-ui)
 
